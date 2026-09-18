@@ -6,10 +6,13 @@
   'use strict';
 
   /* ============================================================
-     CONFIG
-     Paste your form endpoint here (Formspree, Basin, Web3Forms…)
-     and enquiries POST straight to Lara's inbox. Leave it empty and
-     the form falls back to opening the visitor's own mail app.
+     CONFIG — contact form endpoint
+     The Google Apps Script web app URL (ends in /exec). Source and
+     setup steps: docs/contact-form.gs and README.md.
+
+     Leave it empty and the form falls back to opening the visitor's
+     own mail app — which fails silently for anyone on webmail, so
+     an empty endpoint means enquiries are being lost. Fill it in.
      ============================================================ */
   var FORM_ENDPOINT = '';
 
@@ -301,12 +304,19 @@
       return;
     }
 
+    /* URLSearchParams rather than the FormData object: it posts as
+       application/x-www-form-urlencoded, which (a) is a CORS-simple request so
+       the browser sends no preflight, and (b) is the shape Apps Script parses
+       into e.parameter. Posting FormData here silently arrives empty. */
     fetch(FORM_ENDPOINT, {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: data
+      body: new URLSearchParams(data)
     }).then(function (r) {
       if (!r.ok) throw new Error('bad status');
+      // Tolerate a non-JSON body rather than failing a delivered enquiry.
+      return r.json().catch(function () { return { ok: true }; });
+    }).then(function (res) {
+      if (res && res.ok === false) throw new Error(res.error || 'rejected');
       try { sessionStorage.setItem('sent', String(Date.now())); } catch (e) {}
       form.reset();
       if (status) {
