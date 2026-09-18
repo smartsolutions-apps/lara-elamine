@@ -1,0 +1,39 @@
+# Search engines are welcome — the site should rank.
+User-agent: *
+Allow: /
+
+# Known email/contact harvesters and aggressive content scrapers.
+# Honour-system only (they can ignore it), which is why the address
+# is also never written into the HTML in the first place.
+User-agent: EmailCollector
+Disallow: /
+User-agent: EmailSiphon
+Disallow: /
+User-agent: EmailWolf
+Disallow: /
+User-agent: ExtractorPro
+Disallow: /
+User-agent: Crescent
+Disallow: /
+User-agent: CherryPicker
+Disallow: /
+User-agent: NICErsPRO
+Disallow: /
+User-agent: WebBandit
+Disallow: /
+User-agent: SiteSnagger
+Disallow: /
+User-agent: ProWebWalker
+Disallow: /
+User-agent: WebCopier
+Disallow: /
+User-agent: HTTrack
+Disallow: /
+User-agent: MIIxpc
+Disallow: /
+User-agent: Telport
+Disallow: /
+User-agent: MSIECrawler
+Disallow: /
+
+Sitemap: https://lara-elamine.web.app/sitemap.xml
