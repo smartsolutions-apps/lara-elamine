@@ -50,11 +50,13 @@ function doPost(e) {
 
     var interest = clean(p.interest) || 'General enquiry';
     var org = clean(p.organisation) || '—';
+    var contactType = clean(p.contactType) || '—';
     var message = clean(p.message);
 
     var body = [
       'New enquiry from ' + SITE,
       '',
+      'Contacting as:  ' + contactType,
       'Name:           ' + name,
       'Email:          ' + email,
       'Organisation:   ' + org,

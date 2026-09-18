@@ -195,6 +195,18 @@
   }
 
   function validate(input) {
+    /* Radios report their own value whether or not they are selected, so the
+       group has to be asked directly — otherwise an untouched choice passes. */
+    if (input.type === 'radio') {
+      var picked = form.querySelector('input[name="' + input.name + '"]:checked');
+      if (!picked) {
+        showError(input, 'Please choose one.');
+        return false;
+      }
+      clearError(input);
+      return true;
+    }
+
     var value = (input.value || '').trim();
     if (!value) {
       showError(input, 'This field is required.');
@@ -216,6 +228,13 @@
       input.addEventListener('input', function () {
         if (fieldWrap(input) && fieldWrap(input).classList.contains('has-error')) validate(input);
       });
+      // A radio group only fires `change`, and clearing the error should not
+      // wait for the field to lose focus.
+      if (input.type === 'radio') {
+        form.querySelectorAll('input[name="' + input.name + '"]').forEach(function (r) {
+          r.addEventListener('change', function () { validate(input); });
+        });
+      }
     });
 
     form.addEventListener('submit', function (e) {
@@ -284,6 +303,7 @@
     if (!FORM_ENDPOINT) {
       var subject = 'Website enquiry — ' + (data.get('interest') || 'General');
       var body = [
+        'Contacting as: ' + (data.get('contactType') || '—'),
         'Name: ' + data.get('name'),
         'Email: ' + data.get('email'),
         'Organisation: ' + (data.get('organisation') || '—'),
@@ -332,25 +352,6 @@
       if (btn) btn.disabled = false;
     });
   }
-
-  /* ---------- Accent palette picker (in the footer) ---------- */
-  var swatches = Array.prototype.slice.call(document.querySelectorAll('.swatch'));
-
-  /* Purple is the brand colour. A visitor can preview the other palettes, but the
-     choice is deliberately NOT saved — every page load returns to purple. */
-  function applyAccent(name) {
-    document.documentElement.setAttribute('data-accent', name);
-    swatches.forEach(function (s) {
-      s.setAttribute('aria-pressed', String(s.dataset.accent === name));
-    });
-  }
-
-  swatches.forEach(function (s) {
-    s.addEventListener('click', function () { applyAccent(s.dataset.accent); });
-  });
-
-  // Reflect whatever the inline head script restored from storage.
-  applyAccent(document.documentElement.getAttribute('data-accent') || 'plum');
 
   /* ---------- Footer year ---------- */
   var year = document.getElementById('year');

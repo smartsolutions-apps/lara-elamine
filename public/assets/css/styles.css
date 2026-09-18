@@ -1,54 +1,49 @@
 /* ============================================================
    Lara El Amine — Executive & Career Coaching / HR Consulting
-   Design system: "Warm Editorial"
+   Design system: "Warm Editorial", fixed purple palette.
 
-   THEMES
-   Each theme is a full palette — paper, ink, metallic and accent all
-   change together, so the site never sits a cool accent on warm paper.
-   Use the accent picker in the footer, or set a permanent default on <html>:
-       <html lang="en" data-accent="ocean">
-   Available: terracotta (default) · ocean · forest · plum
-   To add one, copy a [data-accent] block in section 1b and add a
-   matching <button class="swatch" data-accent="..."> in index.html.
+   Every colour comes from the tokens in section 1. Change a token
+   and it propagates; do not hard-code a hex below that block.
    ============================================================ */
 
 /* ---------- 1. Tokens ---------- */
 :root{
-  /* Defaults = the terracotta theme. Every value here is overridden
-     per theme by the [data-accent] blocks below. */
-  --ink:            #16232F;
-  --ink-deep:       #0E1922;
-  --ink-soft:       #24384A;
-  --cream:          #FBF7F2;
-  --sand:           #F3EBE1;
-  --sand-deep:      #E7DACA;
-  --line:           #E2D6C6;
-  --body:           #45525D;
-  --muted:          #5F6B74;
+  /* Purple is the brand colour, fixed. The site previously shipped four
+     swappable palettes and a picker in the footer; Lara asked for purple to be
+     permanent, so these are now the only tokens. */
+  --ink:            #211A29;
+  --ink-deep:       #160F1C;
+  --ink-soft:       #3B2E45;
+  --cream:          #FAF7FB;
+  --sand:           #F1EAF3;
+  --sand-deep:      #E2D6E5;
+  --line:           #DFD3E2;
+  --body:           #4B4453;
+  --muted:          #6E6677;
   --white:          #FFFFFF;
 
   /* Secondary metallic.
      --brass      for the dark sections
      --metal-ink  darker cousin for the light paper, so small labels
                   (timeline dates, step numbers) still pass contrast */
-  --brass:          #B08A50;
-  --metal-ink:      #7E6230;
+  --brass:          #C2A2C9;
+  --metal-ink:      #7A5F84;
 
   /* Accent.
      --accent          text + fills on light backgrounds (>=4.5:1 on paper)
      --accent-lt       hover fill, still dark enough for near-white text
      --accent-on-dark  lighter tint for use on the dark sections
      --on-accent       text colour that sits on top of an accent fill */
-  --accent:         #A84C28;
-  --accent-lt:      #C2643F;
-  --accent-on-dark: #E08A63;
-  --on-accent:      #FFF6EF;
-  --glow:           rgba(176,138,80,.20);
+  --accent:         #6E3D74;
+  --accent-lt:      #8A4F92;
+  --accent-on-dark: #C593CB;
+  --on-accent:      #FDF6FE;
+  --glow:           rgba(194,162,201,.26);
 
   /* On dark */
-  --on-dark:        #F1E7DA;
-  --on-dark-muted:  #A9B6C1;
-  --on-dark-line:   rgba(241,231,218,.16);
+  --on-dark:        #F3EAF5;
+  --on-dark-muted:  #B2A6BA;
+  --on-dark-line:   rgba(243,234,245,.16);
 
   /* Type */
   --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
@@ -78,51 +73,6 @@
 
   --header-h: 74px;
   --ease: cubic-bezier(.22,.61,.36,1);
-}
-
-/* ---------- 1b. Accent themes ----------
-   Each theme is a COMPLETE palette, not just an accent swap: the paper
-   tones, the dark sections and the secondary metallic all shift with it,
-   so a blue site never sits on a warm sand background.
-   Every accent/metal value below is contrast-checked against its own
-   paper and ink (>=4.5:1 for body-size text).
------------------------------------------------------------------- */
-
-:root[data-accent="terracotta"]{
-  --cream:#FBF7F2; --sand:#F3EBE1; --sand-deep:#E7DACA; --line:#E2D6C6;
-  --ink:#16232F;   --ink-deep:#0E1922; --ink-soft:#24384A;
-  --body:#45525D;  --muted:#5F6B74;
-  --brass:#B08A50; --metal-ink:#7E6230;
-  --on-dark:#F1E7DA; --on-dark-muted:#A9B6C1; --on-dark-line:rgba(241,231,218,.16);
-  --glow:rgba(176,138,80,.20);
-  --accent:#A84C28; --accent-lt:#C2643F; --accent-on-dark:#E08A63; --on-accent:#FFF6EF;
-}
-:root[data-accent="ocean"]{
-  --cream:#F6F9FC; --sand:#E7EFF7; --sand-deep:#D5E3EF; --line:#D2DFEC;
-  --ink:#0F1F2D;   --ink-deep:#08151E; --ink-soft:#1D3A52;
-  --body:#3E4C59;  --muted:#5C6D7B;
-  --brass:#8FB0CC; --metal-ink:#4E6E8A;
-  --on-dark:#E9F2F9; --on-dark-muted:#9EB4C6; --on-dark-line:rgba(233,242,249,.16);
-  --glow:rgba(143,176,204,.24);
-  --accent:#1F5C8B; --accent-lt:#2A74AC; --accent-on-dark:#7FB8E3; --on-accent:#F4FAFF;
-}
-:root[data-accent="forest"]{
-  --cream:#F8FAF6; --sand:#E9F0E6; --sand-deep:#D7E3D2; --line:#D4E0CF;
-  --ink:#14241B;   --ink-deep:#0C1810; --ink-soft:#254433;
-  --body:#42504A;  --muted:#5E6E64;
-  --brass:#A6BC94; --metal-ink:#57703F;
-  --on-dark:#EAF2E7; --on-dark-muted:#A3B6A9; --on-dark-line:rgba(234,242,231,.16);
-  --glow:rgba(166,188,148,.26);
-  --accent:#2E6249; --accent-lt:#3C7F5E; --accent-on-dark:#7CC49B; --on-accent:#F3FBF6;
-}
-:root[data-accent="plum"]{
-  --cream:#FAF7FB; --sand:#F1EAF3; --sand-deep:#E2D6E5; --line:#DFD3E2;
-  --ink:#211A29;   --ink-deep:#160F1C; --ink-soft:#3B2E45;
-  --body:#4B4453;  --muted:#6E6677;
-  --brass:#C2A2C9; --metal-ink:#7A5F84;
-  --on-dark:#F3EAF5; --on-dark-muted:#B2A6BA; --on-dark-line:rgba(243,234,245,.16);
-  --glow:rgba(194,162,201,.26);
-  --accent:#6E3D74; --accent-lt:#8A4F92; --accent-on-dark:#C593CB; --on-accent:#FDF6FE;
 }
 
 /* ---------- 2. Reset ---------- */
@@ -207,8 +157,6 @@ em{ font-style:italic; }
 
 .btn-primary{ --btn-bg:var(--accent); --btn-bd:var(--accent); --btn-fg:var(--on-accent); }
 .btn-primary:hover{ --btn-bg:var(--accent-lt); --btn-bd:var(--accent-lt); }
-.btn-ghost{ --btn-bg:transparent; --btn-fg:var(--ink); --btn-bd:var(--line); }
-.btn-ghost:hover{ --btn-bg:var(--white); --btn-bd:var(--ink); }
 .btn-sm{ padding:.66rem 1.2rem; font-size:.83rem; }
 .btn-block{ display:flex; width:100%; }
 
@@ -335,15 +283,9 @@ em{ font-style:italic; }
 .hero-lede{ font-size:clamp(1.05rem,.98rem + .4vw,1.24rem); color:var(--muted); max-width:34rem; margin-bottom:2rem; }
 .hero-actions{ display:flex; flex-wrap:wrap; gap:.85rem; margin-bottom:2.4rem; }
 
-.hero-chips{ display:flex; flex-wrap:wrap; gap:.5rem .55rem; }
-.hero-chips li{
-  padding:.42rem .85rem; border:1px solid var(--line); border-radius:100px;
-  background:rgba(255,255,255,.6);
-  font-size:.76rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft);
-}
-
-/* Capped at the photo's native 413px so the portrait is never upscaled. */
-.hero-portrait{ margin:0 0 0 auto; position:relative; width:100%; max-width:413px; }
+/* The portrait is 820px wide natively, so this cap is about composition, not
+   resolution — it keeps the figure from dominating the first screen. */
+.hero-portrait{ margin:0 0 0 auto; position:relative; width:100%; max-width:430px; }
 .portrait-frame{
   position:relative; border-radius:280px 280px var(--r-lg) var(--r-lg); overflow:hidden;
   background:var(--white); box-shadow:var(--shadow-lg);
@@ -353,48 +295,6 @@ em{ font-style:italic; }
   border-radius:inherit; box-shadow:inset 0 0 0 1px rgba(22,35,47,.08);
 }
 .portrait-frame img{ width:100%; height:auto; }
-
-/* ---------- 7. Trust bar / wordmark wall ---------- */
-/* Deliberately typographic rather than real company logos: a uniform set of
-   monograms reads as one designed system, and avoids reproducing third-party
-   trademarks on a personal site. */
-.trustbar{ background:var(--ink); color:var(--on-dark-muted); padding-block:2.6rem; }
-.trustbar-label{
-  margin:0 0 1.5rem; font-size:var(--fs-xs); font-weight:600;
-  letter-spacing:.15em; text-transform:uppercase; color:var(--brass);
-}
-.logo-wall{
-  display:grid; grid-template-columns:repeat(5,1fr); gap:1rem;
-}
-.logo-wall li{
-  display:flex; flex-direction:column; align-items:center; text-align:center; gap:.7rem;
-  padding:1.3rem .8rem;
-  border:1px solid var(--on-dark-line); border-radius:var(--r-md);
-  background:rgba(255,255,255,.03);
-  transition:background-color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
-}
-.logo-wall li:hover{
-  background:rgba(255,255,255,.07);
-  border-color:color-mix(in srgb, var(--brass) 45%, transparent);
-  transform:translateY(-3px);
-}
-.logo-mark{
-  display:grid; place-items:center; width:54px; height:54px; border-radius:50%;
-  border:1px solid color-mix(in srgb, var(--brass) 55%, transparent);
-  font-family:var(--font-display); font-size:1.02rem; font-weight:600;
-  letter-spacing:.02em; color:var(--brass);
-}
-.logo-name{ font-size:.82rem; line-height:1.35; color:var(--on-dark); }
-
-/* ---------- 8. Tick lists ---------- */
-.ticks{ display:flex; flex-direction:column; gap:.6rem; }
-.ticks li{ position:relative; padding-left:1.6rem; font-size:var(--fs-sm); }
-.ticks li::before{
-  content:""; position:absolute; left:0; top:.52em;
-  width:8px; height:8px; border-radius:50%;
-  background:var(--accent); opacity:.85;
-}
-.section-dark .ticks li::before{ background:var(--brass); }
 
 /* ---------- 9. Service cards ---------- */
 .card-grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(1.1rem,.6rem + 1.4vw,1.7rem); }
@@ -407,10 +307,6 @@ em{ font-style:italic; }
   transition:transform .38s var(--ease), box-shadow .38s var(--ease), border-color .38s var(--ease);
 }
 .svc-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lg); border-color:var(--sand-deep); }
-.svc-num{
-  display:block; font-family:var(--font-display); font-size:.95rem; font-weight:600;
-  color:var(--metal-ink); letter-spacing:.06em; margin-bottom:1rem;
-}
 .svc-card h3{ font-size:var(--fs-h3); margin-bottom:.7rem; }
 .svc-card > p:not([class]){ color:var(--muted); font-size:var(--fs-sm); }
 
@@ -446,31 +342,10 @@ em{ font-style:italic; }
 .svc-card:hover .svc-icon-wrap,.cap-card:hover .cap-icon-wrap{
   background:color-mix(in srgb, var(--accent) 18%, transparent);
 }
-/* The number now sits beside the icon as a quiet index, not the main mark. */
-.svc-card .svc-num{ margin-bottom:.55rem; }
-
 /* ---------- 11. About ---------- */
-.about-inner{ display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(2rem,1rem + 4vw,4.5rem); align-items:start; }
-
-.glance{
-  position:sticky; top:calc(var(--header-h) + 2rem);
-  padding:clamp(1.6rem,1.1rem + 1.4vw,2.2rem);
-  background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg);
-  box-shadow:var(--shadow-sm);
-}
-.glance-kicker{
-  font-size:var(--fs-xs); font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--accent); margin-bottom:1.4rem;
-}
-.glance-list{ margin:0; display:flex; flex-direction:column; gap:1.05rem; }
-.glance-list > div{ padding-bottom:1.05rem; border-bottom:1px solid var(--line); }
-.glance-list > div:last-child{ padding-bottom:0; border-bottom:0; }
-.glance-list dt{
-  font-size:.75rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:.3rem;
-}
-.glance-list dd{ margin:0; font-size:var(--fs-sm); color:var(--ink); line-height:1.45; }
-.about-copy .section-title{ margin-bottom:1.1rem; }
+/* Lara asked for About to read as one screenful, so the "At a glance" card
+   was dropped and this is a single measured reading column. */
+.shell-read{ max-width:52rem; }
 
 /* ---------- 16. Contact ---------- */
 .section-contact{ background:var(--ink-deep); }
@@ -518,15 +393,10 @@ em{ font-style:italic; }
 /* Extra bottom padding keeps the last row clear of the fixed
    WhatsApp / back-to-top buttons in the bottom-right corner. */
 .site-footer{ background:var(--ink); color:var(--on-dark-muted); padding-block:clamp(3.5rem,2rem + 4vw,5rem) 5rem; }
-.footer-top{
-  display:grid; grid-template-columns:1.15fr 2fr; gap:clamp(2rem,1rem + 3.5vw,4rem);
-  padding-bottom:clamp(2.2rem,1.4rem + 2.4vw,3.2rem); border-bottom:1px solid var(--on-dark-line);
-}
 .brand-footer .brand-mark{ background:var(--sand); color:var(--ink); }
 .brand-footer .brand-name{ color:var(--on-dark); }
 .brand-footer .brand-role{ color:var(--brass); }
 .brand-footer:hover .brand-mark{ background:var(--brass); color:var(--ink); }
-.footer-blurb{ margin:1.3rem 0 1.5rem; font-size:var(--fs-sm); max-width:34ch; }
 
 .footer-social{ display:flex; gap:.6rem; }
 /* `background:transparent` matters: without it the <button> picks up the UA's
@@ -539,34 +409,6 @@ em{ font-style:italic; }
 }
 .footer-social a:hover,.footer-social button:hover{ background:var(--brass); border-color:var(--brass); color:var(--ink); transform:translateY(-2px); }
 .footer-social svg{ width:18px; height:18px; fill:currentColor; }
-
-.footer-nav{ display:grid; grid-template-columns:repeat(4,1fr); gap:2rem 1.5rem; }
-.footer-col h3{
-  font-family:var(--font-body); font-size:var(--fs-xs); font-weight:700;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--brass); margin-bottom:1.1rem;
-}
-.footer-col ul{ display:flex; flex-direction:column; gap:.65rem; }
-.footer-col a,.footer-static{ font-size:var(--fs-sm); color:var(--on-dark-muted); transition:color .22s var(--ease); }
-.footer-col a:hover{ color:var(--on-dark); }
-
-.footer-creds{
-  display:flex; flex-wrap:wrap; gap:.6rem 1.6rem;
-  padding-block:1.6rem; border-bottom:1px solid var(--on-dark-line);
-}
-.footer-creds span{
-  position:relative; font-size:.76rem; letter-spacing:.06em; text-transform:uppercase;
-  color:var(--on-dark-muted); font-weight:500;
-}
-.footer-creds span::before{ content:"✦"; color:var(--brass); margin-right:.5rem; font-size:.7em; vertical-align:1px; }
-
-.footer-bottom{
-  display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap;
-  padding-top:1.6rem;
-}
-.footer-bottom p{ margin:0; font-size:.8rem; }
-.footer-legal{ display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; }
-.footer-legal a{ font-size:.8rem; transition:color .22s var(--ease); }
-.footer-legal a:hover{ color:var(--on-dark); }
 
 /* ---------- 18. Floating actions (WhatsApp + back to top) ---------- */
 .fabs{
@@ -597,43 +439,6 @@ em{ font-style:italic; }
 .to-top:hover{ background:var(--accent); }
 .to-top svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 
-/* ---------- 18b. Accent picker (footer) ---------- */
-.footer-theme{
-  display:flex; align-items:center; gap:1rem 1.4rem; flex-wrap:wrap;
-  padding-block:1.5rem; border-bottom:1px solid var(--on-dark-line);
-}
-.footer-theme-label{
-  font-size:var(--fs-xs); font-weight:700; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--brass);
-}
-.footer-swatches{ display:flex; align-items:center; gap:.55rem; flex-wrap:wrap; }
-
-.swatch{
-  position:relative; width:34px; height:34px; flex:none; padding:0; cursor:pointer;
-  border-radius:50%; background:var(--sw);
-  border:2px solid transparent; box-shadow:inset 0 0 0 1px rgba(0,0,0,.22);
-  transition:transform .22s var(--ease), border-color .22s var(--ease), box-shadow .22s var(--ease);
-}
-.swatch span{                       /* label for screen readers and hover tooltips */
-  position:absolute; width:1px; height:1px; overflow:hidden;
-  clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
-}
-.swatch:hover{ transform:scale(1.12); }
-/* The live theme gets a ring plus a tick, so it reads as selected without colour alone. */
-.swatch[aria-pressed="true"]{
-  border-color:var(--on-dark);
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.22), 0 0 0 3px var(--on-dark-line);
-}
-.swatch[aria-pressed="true"]::after{
-  content:""; position:absolute; inset:0; margin:auto;
-  width:7px; height:11px; transform:translateY(-1px) rotate(45deg);
-  border:solid #fff; border-width:0 2px 2px 0;
-}
-.swatch[data-accent="terracotta"]{ --sw:#A84C28; }
-.swatch[data-accent="ocean"]    { --sw:#1F5C8B; }
-.swatch[data-accent="forest"]   { --sw:#2E6249; }
-.swatch[data-accent="plum"]     { --sw:#6E3D74; }
-
 /* ---------- 18c. Honeypot + link-styled buttons ---------- */
 /* Off-screen rather than display:none — some bots skip hidden inputs. */
 .hp{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
@@ -646,8 +451,6 @@ em{ font-style:italic; }
 }
 .contact-list .linkish{ color:var(--on-dark); }
 .contact-list .linkish:hover{ color:var(--brass); border-bottom-color:currentColor; }
-.footer-col .linkish{ font-size:var(--fs-sm); color:var(--on-dark-muted); }
-.footer-col .linkish:hover{ color:var(--on-dark); }
 
 /* ---------- 19. Reveal animation ---------- */
 /* Gated on .js so that with scripting disabled every section stays visible. */
@@ -662,22 +465,6 @@ em{ font-style:italic; }
 
 /* Visually hidden, still read aloud: the services block is labelled for
    screen readers without printing a heading the narrative does not have. */
-.visually-hidden{
-  position:absolute; width:1px; height:1px; overflow:hidden;
-  clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
-}
-
-/* ---------- 19c. Creed band ---------- */
-.creed{ background:var(--ink-deep); color:var(--on-dark); padding-block:clamp(2.6rem,1.8rem + 2.6vw,4rem); }
-.creed-line{
-  margin:0; display:flex; justify-content:center; flex-wrap:wrap; gap:.4em 1.5em;
-  font-family:var(--font-display); font-size:clamp(1.45rem,1rem + 2.4vw,2.6rem);
-  letter-spacing:.05em; text-transform:uppercase; text-align:center; line-height:1.2;
-}
-.creed-line span{ position:relative; }
-.creed-line span + span::before{
-  content:"·"; position:absolute; left:-.78em; color:var(--brass);
-}
 
 /* ---------- 19d. About closing statement ---------- */
 .about-statement{
@@ -695,9 +482,93 @@ em{ font-style:italic; }
   margin:0 0 1.2rem; font-size:var(--fs-xs); font-weight:700;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink);
 }
-.outcomes-list{ display:grid; grid-template-columns:repeat(3,1fr); gap:.9rem 1.8rem; }
-.outcomes-list li{ font-size:var(--fs-lede); color:var(--ink); padding-left:1.7rem; }
-.outcomes-list li::before{ top:.62em; }
+/* Coaching outcome reads as a progression, per Lara's
+   "Clarity ›› Building Performance ›› Sustainable Changes". The chevrons are
+   generated, so the three items stay plain text for screen readers. */
+.flow{ display:flex; flex-wrap:wrap; align-items:center; gap:.7rem 1.1rem; }
+.flow li{
+  font-family:var(--font-display); font-size:clamp(1.02rem,.94rem + .45vw,1.3rem);
+  color:var(--ink); line-height:1.3;
+}
+.flow li + li::before{
+  content:"››"; margin-right:1.1rem; color:var(--accent);
+  font-family:var(--font-body); font-weight:700; letter-spacing:-.04em;
+}
+
+/* ---------- 19f. Signature ---------- */
+/* Lara's slogan, set as a signature on the first page. The brass rule under it
+   echoes the hand-drawn underline on the original shirt graphic. */
+.signature{
+  margin:0 0 2rem; display:inline-block; position:relative;
+  font-family:var(--font-display); font-style:italic; font-weight:500;
+  font-size:clamp(1.22rem,1.05rem + .9vw,1.7rem); color:var(--accent);
+  font-variation-settings:"SOFT" 40,"WONK" 1; line-height:1.25;
+}
+.signature::after{
+  content:""; position:absolute; left:0; right:0; bottom:-.32em; height:2px;
+  border-radius:2px; background:var(--brass); opacity:.75;
+}
+
+/* ---------- 19g. First-page service grid ---------- */
+.services{ margin-top:clamp(3.2rem,2rem + 4vw,5.5rem); }
+
+/* ---------- 19h. Credential lockup ---------- */
+.credential{
+  display:flex; align-items:center; gap:1rem; margin-top:2.2rem;
+  padding:1rem 1.3rem 1rem 1rem;
+  background:var(--white); border:1px solid var(--line); border-radius:100px;
+  box-shadow:var(--shadow-sm); max-width:max-content;
+  transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
+}
+.credential:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:var(--accent); }
+.credential-mark{
+  flex:none; display:grid; place-items:center; width:52px; height:52px; border-radius:50%;
+  background:var(--accent); color:var(--on-accent);
+  font-family:var(--font-display); font-size:.95rem; font-weight:600; letter-spacing:.02em;
+}
+.credential-text{ display:flex; flex-direction:column; line-height:1.3; min-width:0; }
+.credential-text strong{ color:var(--ink); font-size:var(--fs-sm); font-weight:600; }
+.credential-text span{ color:var(--muted); font-size:.8rem; }
+.credential svg{
+  flex:none; width:17px; height:17px; margin-left:.3rem;
+  fill:none; stroke:var(--accent); stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;
+  transition:transform .28s var(--ease);
+}
+.credential:hover svg{ transform:translateX(3px); }
+
+/* ---------- 19i. Radio choices (contact form) ---------- */
+.choice-field{ border:0; padding:0; margin:0; }
+.choice-field legend{
+  padding:0; margin-bottom:.55rem;
+  font-size:var(--fs-xs); font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--on-dark-muted);
+}
+.choice-field legend span{ color:var(--accent-on-dark); }
+.choices{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
+.choice{
+  display:flex; align-items:center; gap:.6rem; cursor:pointer;
+  padding:.72rem .95rem; border-radius:var(--r-sm);
+  background:rgba(255,255,255,.05); border:1px solid var(--on-dark-line);
+  font-size:var(--fs-sm); color:var(--on-dark);
+  transition:border-color .22s var(--ease), background-color .22s var(--ease);
+}
+.choice input{ accent-color:var(--accent-on-dark); width:17px; height:17px; flex:none; margin:0; cursor:pointer; }
+.choice:hover{ background:rgba(255,255,255,.09); }
+.choice:has(input:checked){ border-color:var(--brass); background:rgba(255,255,255,.1); }
+.choice-field.has-error .choice{ border-color:var(--accent-on-dark); }
+
+/* ---------- 19j. Footer ---------- */
+.footer-simple{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1.5rem 2rem; flex-wrap:wrap;
+}
+/* The header lockup truncates its role line to one tidy line; the footer has
+   room to wrap instead, and the full wording is the point down here. */
+.brand-footer{ margin-right:0; flex:1 1 18rem; min-width:0; }
+.brand-footer .brand-name,
+.brand-footer .brand-role{ white-space:normal; overflow:visible; text-overflow:clip; }
+.brand-footer .brand-role{ line-height:1.35; }
+.footer-copy{ margin:0; font-size:.8rem; width:100%; padding-top:1.4rem; border-top:1px solid var(--on-dark-line); }
 
 /* ============================================================
    20. Responsive
@@ -709,7 +580,6 @@ em{ font-style:italic; }
 }
 
 @media (max-width:980px){
-  .logo-wall{ grid-template-columns:repeat(3,1fr); }
   .nav-desktop{ display:none; }
   .nav-toggle{ display:grid; }
   .brand-role{ display:block; }
@@ -718,33 +588,22 @@ em{ font-style:italic; }
   .hero-copy{ max-width:38rem; }
   .hero-portrait{ max-width:430px; margin-inline:auto; width:100%; }
 
-  .about-inner{ grid-template-columns:1fr; gap:2.5rem; }
-  .glance{ position:static; }
   .contact-inner{ grid-template-columns:1fr; }
-  .footer-top{ grid-template-columns:1fr; }
 }
 
 @media (max-width:860px){
   .card-grid-3{ grid-template-columns:1fr; }
-  .outcomes-list{ grid-template-columns:1fr; }
-  .footer-nav{ grid-template-columns:repeat(2,1fr); }
 }
 
 @media (max-width:700px){
   :root{ --header-h:66px; }
   .card-grid-2{ grid-template-columns:1fr; }
   .header-cta{ display:none; }
-  .logo-wall{ grid-template-columns:repeat(2,1fr); }
   .field-row{ grid-template-columns:1fr; }
-  .footer-bottom{ flex-direction:column; align-items:flex-start; }
   .site-footer{ padding-bottom:7rem; }
 
   /* Comfortable tap targets: footer and contact links are tightly stacked
      text on desktop, which is far too small to hit reliably on a phone. */
-  .footer-col ul{ gap:0; }
-  .footer-col a,.footer-col .linkish,.footer-static{ display:block; padding-block:.62rem; }
-  .footer-legal{ gap:0 1.4rem; }
-  .footer-legal a{ display:block; padding-block:.66rem; }
   .contact-list a,.contact-list .linkish{ padding-block:.5rem; }
   .nav-mobile-mail{ padding-block:.6rem; }
   .portrait-frame{ border-radius:200px 200px var(--r-md) var(--r-md); }
@@ -758,13 +617,13 @@ em{ font-style:italic; }
 }
 
 @media (max-width:520px){
-  .footer-nav{ grid-template-columns:1fr; gap:1.8rem; }
   .hero-actions{ flex-direction:column; align-items:stretch; }
   .hero-actions .btn{ width:100%; }
   .nav-mobile{ width:100%; }
   .nav-mobile nav a{ font-size:1.25rem; }
-  .creed-line{ flex-direction:column; gap:.35em; }
-  .creed-line span + span::before{ display:none; }
+  .choices{ grid-template-columns:1fr; }
+  .footer-simple{ flex-direction:column; align-items:flex-start; }
+  .credential{ border-radius:var(--r-lg); }
 }
 
 /* ---------- 21. Preferences ---------- */
@@ -778,9 +637,9 @@ em{ font-style:italic; }
 }
 
 @media print{
-  .site-header,.nav-mobile,.nav-scrim,.fabs,.footer-theme,.contact-form,.hero-glow{ display:none !important; }
+  .site-header,.nav-mobile,.nav-scrim,.fabs,.contact-form,.hero-glow{ display:none !important; }
   body{ background:#fff; color:#000; }
-  .section-dark,.section-contact,.trustbar,.site-footer{ background:#fff !important; color:#000 !important; }
+  .section-dark,.section-contact,.site-footer{ background:#fff !important; color:#000 !important; }
   .section-dark h2,.section-dark h3,.section-dark .section-title{ color:#000 !important; }
   .js .reveal{ opacity:1 !important; transform:none !important; }
   a[href^="http"]::after{ content:" (" attr(href) ")"; font-size:.75em; }
