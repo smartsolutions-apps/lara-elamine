@@ -1,5 +1,5 @@
 /* ============================================================
-   Lara Kamal — site behaviour
+   Lara El Amine — site behaviour
    Vanilla JS, no dependencies.
    ============================================================ */
 (function () {
@@ -29,7 +29,7 @@
   document.querySelectorAll('.js-mail').forEach(function (el) {
     el.addEventListener('click', function () {
       window.location.href = 'mailto:' + mailAddress(el) +
-        '?subject=' + encodeURIComponent('Enquiry via laraelamine.com');
+        '?subject=' + encodeURIComponent('Enquiry via lara-elamine.web.app');
     });
   });
 
@@ -166,17 +166,6 @@
       if (document.visibilityState === 'visible') setTimeout(sweepReveals, 60);
     });
   }
-
-  /* ---------- FAQ: keep only one answer open ---------- */
-  var faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(function (item) {
-    item.addEventListener('toggle', function () {
-      if (!item.open) return;
-      faqItems.forEach(function (other) {
-        if (other !== item) other.open = false;
-      });
-    });
-  });
 
   /* ---------- Contact form ---------- */
   var form = document.getElementById('contactForm');
