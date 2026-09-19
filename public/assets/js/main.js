@@ -16,6 +16,54 @@
      ============================================================ */
   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxI-B1SauiLPOsqI6-dPzFKQcivGJNRGtlgHuKkUGqEuGBM_7myajAt1K1MRBlbO98wfQ/exec';
 
+
+  /* ---------- Copy, per page language ----------
+     Both language pages share this file, so every user-facing string the script
+     produces has to come from here rather than being hard-coded in English. */
+  var LANG = document.documentElement.lang === 'ar' ? 'ar' : 'en';
+  var T = {
+    en: {
+      mailSubject: 'Enquiry via lara-elamine.web.app',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
+      required: 'This field is required.',
+      chooseOne: 'Please choose one.',
+      badEmail: 'Please enter a valid email address.',
+      fixFields: 'Please complete the highlighted fields.',
+      already: 'You have already sent an enquiry \u2014 I will be in touch shortly.',
+      thanks: 'Thank you \u2014 your message has been sent.',
+      sending: 'Sending\u2026',
+      openingMail: 'Opening your email app \u2014 press send to complete.',
+      replySoon: 'Thank you \u2014 I will reply within two business days.',
+      failed: 'Something went wrong. Please try WhatsApp instead.',
+      mailLabels: {
+        subject: 'Website enquiry', contactingAs: 'Contacting as', name: 'Name',
+        email: 'Email', organisation: 'Organisation', interest: 'Interested in', none: '\u2014'
+      }
+    },
+    ar: {
+      mailSubject: '\u0627\u0633\u062a\u0641\u0633\u0627\u0631 \u0639\u0628\u0631 lara-elamine.web.app',
+      openMenu: '\u0641\u062a\u062d \u0627\u0644\u0642\u0627\u0626\u0645\u0629',
+      closeMenu: '\u0625\u063a\u0644\u0627\u0642 \u0627\u0644\u0642\u0627\u0626\u0645\u0629',
+      required: '\u0647\u0630\u0627 \u0627\u0644\u062d\u0642\u0644 \u0645\u0637\u0644\u0648\u0628.',
+      chooseOne: '\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0623\u062d\u062f \u0627\u0644\u062e\u064a\u0627\u0631\u064a\u0646.',
+      badEmail: '\u064a\u0631\u062c\u0649 \u0625\u062f\u062e\u0627\u0644 \u0628\u0631\u064a\u062f \u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a \u0635\u062d\u064a\u062d.',
+      fixFields: '\u064a\u0631\u062c\u0649 \u0627\u0633\u062a\u0643\u0645\u0627\u0644 \u0627\u0644\u062d\u0642\u0648\u0644 \u0627\u0644\u0645\u062d\u062f\u062f\u0629.',
+      already: '\u0644\u0642\u062f \u0623\u0631\u0633\u0644\u062a \u0637\u0644\u0628\u064b\u0627 \u0628\u0627\u0644\u0641\u0639\u0644 \u2014 \u0633\u0623\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0643 \u0642\u0631\u064a\u0628\u064b\u0627.',
+      thanks: '\u0634\u0643\u0631\u064b\u0627 \u0644\u0643 \u2014 \u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0631\u0633\u0627\u0644\u062a\u0643.',
+      sending: '\u062c\u0627\u0631\u064d \u0627\u0644\u0625\u0631\u0633\u0627\u0644\u2026',
+      openingMail: '\u064a\u062a\u0645 \u0641\u062a\u062d \u062a\u0637\u0628\u064a\u0642 \u0627\u0644\u0628\u0631\u064a\u062f \u2014 \u0627\u0636\u063a\u0637 \u0625\u0631\u0633\u0627\u0644 \u0644\u0625\u062a\u0645\u0627\u0645 \u0627\u0644\u0639\u0645\u0644\u064a\u0629.',
+      replySoon: '\u0634\u0643\u0631\u064b\u0627 \u0644\u0643 \u2014 \u0633\u0623\u0631\u062f \u062e\u0644\u0627\u0644 \u064a\u0648\u0645\u064a \u0639\u0645\u0644.',
+      failed: '\u062d\u062f\u062b \u062e\u0637\u0623 \u0645\u0627. \u064a\u0631\u062c\u0649 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629 \u0639\u0628\u0631 \u0648\u0627\u062a\u0633\u0627\u0628.',
+      mailLabels: {
+        subject: '\u0627\u0633\u062a\u0641\u0633\u0627\u0631 \u0645\u0646 \u0627\u0644\u0645\u0648\u0642\u0639',
+        contactingAs: '\u0627\u0644\u0635\u0641\u0629', name: '\u0627\u0644\u0627\u0633\u0645',
+        email: '\u0627\u0644\u0628\u0631\u064a\u062f', organisation: '\u0627\u0644\u0645\u0624\u0633\u0633\u0629',
+        interest: '\u0645\u0647\u062a\u0645 \u0628\u0640', none: '\u2014'
+      }
+    }
+  }[LANG];
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var formLoadedAt = Date.now();
 
@@ -32,7 +80,7 @@
   document.querySelectorAll('.js-mail').forEach(function (el) {
     el.addEventListener('click', function () {
       window.location.href = 'mailto:' + mailAddress(el) +
-        '?subject=' + encodeURIComponent('Enquiry via lara-elamine.web.app');
+        '?subject=' + encodeURIComponent(T.mailSubject);
     });
   });
 
@@ -72,7 +120,7 @@
   function setNav(open) {
     if (!toggle || !drawer || !scrim) return;
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    toggle.setAttribute('aria-label', open ? T.closeMenu : T.openMenu);
     drawer.classList.toggle('is-open', open);
     scrim.classList.toggle('is-open', open);
     document.body.classList.toggle('nav-open', open);
@@ -200,7 +248,7 @@
     if (input.type === 'radio') {
       var picked = form.querySelector('input[name="' + input.name + '"]:checked');
       if (!picked) {
-        showError(input, 'Please choose one.');
+        showError(input, T.chooseOne);
         return false;
       }
       clearError(input);
@@ -209,11 +257,11 @@
 
     var value = (input.value || '').trim();
     if (!value) {
-      showError(input, 'This field is required.');
+      showError(input, T.required);
       return false;
     }
     if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-      showError(input, 'Please enter a valid email address.');
+      showError(input, T.badEmail);
       return false;
     }
     clearError(input);
@@ -247,7 +295,7 @@
 
       if (firstBad) {
         if (status) {
-          status.textContent = 'Please complete the highlighted fields.';
+          status.textContent = T.fixFields;
           status.className = 'form-status is-err';
         }
         firstBad.focus();
@@ -275,7 +323,7 @@
       try {
         var last = parseInt(sessionStorage.getItem('sent') || '0', 10);
         if (last && Date.now() - last < 600000) {
-          status.textContent = 'You have already sent an enquiry — I will be in touch shortly.';
+          status.textContent = T.already;
           status.className = 'form-status is-ok';
           return;
         }
@@ -287,7 +335,7 @@
 
   function fakeSuccess() {
     if (!status) return;
-    status.textContent = 'Thank you — your message has been sent.';
+    status.textContent = T.thanks;
     status.className = 'form-status is-ok';
     form.reset();
   }
@@ -295,19 +343,20 @@
   function send(data) {
     var btn = form.querySelector('button[type="submit"]');
     if (btn) { btn.disabled = true; }
-    if (status) { status.textContent = 'Sending…'; status.className = 'form-status'; }
+    if (status) { status.textContent = T.sending; status.className = 'form-status'; }
 
     // FORM_ENDPOINT is set at the top of this file. Until it is filled in we fall
     // back to the visitor's own mail client, with the address assembled at runtime
     // so it never appears in the page source for harvesters to scrape.
     if (!FORM_ENDPOINT) {
-      var subject = 'Website enquiry — ' + (data.get('interest') || 'General');
+      var L = T.mailLabels;
+      var subject = L.subject + ' - ' + (data.get('interest') || '');
       var body = [
-        'Contacting as: ' + (data.get('contactType') || '—'),
-        'Name: ' + data.get('name'),
-        'Email: ' + data.get('email'),
-        'Organisation: ' + (data.get('organisation') || '—'),
-        'Interested in: ' + data.get('interest'),
+        L.contactingAs + ': ' + (data.get('contactType') || L.none),
+        L.name + ': ' + data.get('name'),
+        L.email + ': ' + data.get('email'),
+        L.organisation + ': ' + (data.get('organisation') || L.none),
+        L.interest + ': ' + data.get('interest'),
         '',
         data.get('message')
       ].join('\n');
@@ -318,7 +367,7 @@
 
       if (btn) btn.disabled = false;
       if (status) {
-        status.textContent = 'Opening your email app — press send to complete.';
+        status.textContent = T.openingMail;
         status.className = 'form-status is-ok';
       }
       return;
@@ -340,12 +389,12 @@
       try { sessionStorage.setItem('sent', String(Date.now())); } catch (e) {}
       form.reset();
       if (status) {
-        status.textContent = 'Thank you — I will reply within two business days.';
+        status.textContent = T.replySoon;
         status.className = 'form-status is-ok';
       }
     }).catch(function () {
       if (status) {
-        status.textContent = 'Something went wrong. Please try WhatsApp instead.';
+        status.textContent = T.failed;
         status.className = 'form-status is-err';
       }
     }).then(function () {

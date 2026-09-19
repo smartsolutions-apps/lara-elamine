@@ -178,7 +178,7 @@ em{ font-style:italic; }
 }
 .header-inner{ display:flex; align-items:center; gap:1.5rem; height:var(--header-h); }
 
-.brand{ display:flex; align-items:center; gap:.7rem; margin-right:auto; min-width:0; }
+.brand{ display:flex; align-items:center; gap:.7rem; margin-inline-end:auto; min-width:0; }
 .brand-text{ min-width:0; }
 .brand-name,.brand-role{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .brand-mark{
@@ -211,7 +211,7 @@ em{ font-style:italic; }
 .header-actions{ display:flex; align-items:center; gap:.7rem; flex:none; }
 
 .scroll-progress{
-  position:absolute; left:0; bottom:-1px; height:2px; width:0;
+  position:absolute; inset-inline-start:0; bottom:-1px; height:2px; width:0;
   background:linear-gradient(90deg,var(--accent),var(--brass));
   transition:width .1s linear;
 }
@@ -238,7 +238,7 @@ em{ font-style:italic; }
 
 /* Mobile drawer */
 .nav-mobile{
-  position:fixed; inset:var(--header-h) 0 0 auto; z-index:99;
+  position:fixed; inset-block:var(--header-h) 0; inset-inline-end:0; z-index:99;
   width:min(400px,86vw);
   background:var(--ink); color:var(--on-dark);
   padding:2.2rem var(--gutter) 2rem;
@@ -282,10 +282,11 @@ em{ font-style:italic; }
 .hero-title em{ color:var(--accent); font-style:italic; font-variation-settings:"SOFT" 40,"WONK" 1; }
 .hero-lede{ font-size:clamp(1.05rem,.98rem + .4vw,1.24rem); color:var(--muted); max-width:34rem; margin-bottom:2rem; }
 .hero-actions{ display:flex; flex-wrap:wrap; gap:.85rem; margin-bottom:2.4rem; }
+.hero-actions-end{ justify-content:center; margin:clamp(2.6rem,1.8rem + 2.4vw,3.8rem) 0 0; }
 
 /* The portrait is 820px wide natively, so this cap is about composition, not
    resolution — it keeps the figure from dominating the first screen. */
-.hero-portrait{ margin:0 0 0 auto; position:relative; width:100%; max-width:430px; }
+.hero-portrait{ margin-inline-start:auto; position:relative; width:100%; max-width:430px; }
 .portrait-frame{
   position:relative; border-radius:280px 280px var(--r-lg) var(--r-lg); overflow:hidden;
   background:var(--white); box-shadow:var(--shadow-lg);
@@ -413,7 +414,7 @@ em{ font-style:italic; }
 /* ---------- 18. Floating actions (WhatsApp + back to top) ---------- */
 .fabs{
   position:fixed; z-index:90;
-  right:clamp(1rem,.6rem + 1vw,1.8rem); bottom:clamp(1rem,.6rem + 1vw,1.8rem);
+  inset-inline-end:clamp(1rem,.6rem + 1vw,1.8rem); bottom:clamp(1rem,.6rem + 1vw,1.8rem);
   display:flex; flex-direction:column; align-items:center; gap:.65rem;
 }
 .fab-wa{
@@ -468,7 +469,7 @@ em{ font-style:italic; }
 
 /* ---------- 19d. About closing statement ---------- */
 .about-statement{
-  margin-top:1.9rem; padding-left:1.25rem; border-left:3px solid var(--accent);
+  margin-top:1.9rem; padding-inline-start:1.25rem; border-inline-start:3px solid var(--accent);
   font-family:var(--font-display); font-size:clamp(1.14rem,1rem + .7vw,1.5rem);
   line-height:1.38; color:var(--ink);
 }
@@ -490,8 +491,8 @@ em{ font-style:italic; }
   font-family:var(--font-display); font-size:clamp(1.02rem,.94rem + .45vw,1.3rem);
   color:var(--ink); line-height:1.3;
 }
-.flow li + li::before{
-  content:"››"; margin-right:1.1rem; color:var(--accent);
+.flow li::before{
+  content:"››"; margin-inline-end:.55rem; color:var(--accent);
   font-family:var(--font-body); font-weight:700; letter-spacing:-.04em;
 }
 
@@ -515,7 +516,7 @@ em{ font-style:italic; }
 /* ---------- 19h. Credential lockup ---------- */
 .credential{
   display:flex; align-items:center; gap:1rem; margin-top:2.2rem;
-  padding:1rem 1.3rem 1rem 1rem;
+  padding-block:1rem; padding-inline:1rem 1.3rem;
   background:var(--white); border:1px solid var(--line); border-radius:100px;
   box-shadow:var(--shadow-sm); max-width:max-content;
   transition:transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s var(--ease);
@@ -530,7 +531,7 @@ em{ font-style:italic; }
 .credential-text strong{ color:var(--ink); font-size:var(--fs-sm); font-weight:600; }
 .credential-text span{ color:var(--muted); font-size:.8rem; }
 .credential svg{
-  flex:none; width:17px; height:17px; margin-left:.3rem;
+  flex:none; width:17px; height:17px; margin-inline-start:.3rem;
   fill:none; stroke:var(--accent); stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;
   transition:transform .28s var(--ease);
 }
@@ -562,6 +563,9 @@ em{ font-style:italic; }
   display:flex; align-items:center; justify-content:space-between;
   gap:1.5rem 2rem; flex-wrap:wrap;
 }
+/* Lara asked for the contact buttons to sit further in from the edge, so they
+   take the middle of the row rather than being pushed hard right. */
+.footer-simple .footer-social{ margin-inline:auto; }
 /* The header lockup truncates its role line to one tidy line; the footer has
    room to wrap instead, and the full wording is the point down here. */
 .brand-footer{ margin-right:0; flex:1 1 18rem; min-width:0; }
@@ -569,6 +573,70 @@ em{ font-style:italic; }
 .brand-footer .brand-role{ white-space:normal; overflow:visible; text-overflow:clip; }
 .brand-footer .brand-role{ line-height:1.35; }
 .footer-copy{ margin:0; font-size:.8rem; width:100%; padding-top:1.4rem; border-top:1px solid var(--on-dark-line); }
+
+/* ---------- 19k. Footer meta + language switch ---------- */
+.footer-meta{
+  width:100%; padding-top:1.4rem; border-top:1px solid var(--on-dark-line);
+  display:flex; align-items:center; justify-content:space-between; gap:.8rem 1.5rem; flex-wrap:wrap;
+}
+.footer-copy{ margin:0; font-size:.8rem; }
+.lang-switch{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.5rem 1rem; border-radius:100px;
+  border:1px solid var(--on-dark-line); color:var(--on-dark);
+  font-size:.82rem; font-weight:600;
+  transition:background-color .25s var(--ease), border-color .25s var(--ease);
+}
+.lang-switch:hover{ background:var(--brass); border-color:var(--brass); color:var(--ink); }
+.lang-switch svg{
+  width:15px; height:15px; flex:none;
+  fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
+}
+
+/* ============================================================
+   19l. Arabic + RTL
+   The Arabic page shares this stylesheet; only type and direction change.
+   ============================================================ */
+html[lang="ar"]{
+  --font-display:"Noto Naskh Arabic","Times New Roman",serif;
+  --font-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
+}
+html[lang="ar"] body{ line-height:1.85; }
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3{ line-height:1.35; letter-spacing:0; }
+
+/* Arabic is a joined script: letter-spacing visibly breaks the connections
+   between letters, and uppercase does nothing. Both are reset everywhere the
+   English design applies them to small labels. */
+html[lang="ar"] .eyebrow,
+html[lang="ar"] .outcomes-label,
+html[lang="ar"] .contact-lbl,
+html[lang="ar"] .brand-role,
+html[lang="ar"] .field label,
+html[lang="ar"] .choice-field legend,
+html[lang="ar"] .glance-kicker,
+html[lang="ar"] .credential-text strong{
+  letter-spacing:0; text-transform:none;
+}
+html[lang="ar"] .eyebrow{ font-size:.84rem; }
+html[lang="ar"] .field label,
+html[lang="ar"] .choice-field legend,
+html[lang="ar"] .contact-lbl{ font-size:.82rem; }
+html[lang="ar"] .signature{ font-style:normal; font-weight:600; }
+/* The brand monogram and any Latin run inside Arabic text stay left-to-right. */
+html[lang="ar"] .brand-mark,
+html[lang="ar"] .credential-mark{ direction:ltr; }
+
+/* Arrow glyphs point along the reading direction. */
+[dir="rtl"] .btn svg,
+[dir="rtl"] .credential svg,
+[dir="rtl"] .flow li::before{ transform:scaleX(-1); }
+[dir="rtl"] .btn:hover svg{ transform:scaleX(-1) translateX(3px); }
+[dir="rtl"] .credential:hover svg{ transform:scaleX(-1) translateX(3px); }
+/* The drawer slides in from the near edge, which is the left in RTL. */
+[dir="rtl"] .nav-mobile{ transform:translateX(-100%); }
+[dir="rtl"] .nav-mobile.is-open{ transform:translateX(0); }
 
 /* ============================================================
    20. Responsive
