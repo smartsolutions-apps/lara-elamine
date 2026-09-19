@@ -11,13 +11,38 @@ Hand-written static HTML. No build step, no dependencies, no framework. What is 
 
 ```
 public/
-  index.html              single page, all sections
-  assets/css/styles.css   one stylesheet, sectioned and commented
+  index.html              English page, all sections
+  ar/index.html           Arabic page (lang=ar dir=rtl), same structure
+  assets/css/styles.css   one stylesheet, serves both directions
   assets/js/main.js       vanilla JS: nav, scroll reveal, contact form
-  assets/img/             portrait, share card, favicon
+  assets/img/             portrait (jpg + webp), share card, favicon
 firebase.json             hosting config — CSP and cache headers live here
 docs/contact-form.gs      Google Apps Script that receives the contact form
 ```
+
+## Two languages
+
+`/` is English, `/ar` is Arabic. They are separate static pages so each can be
+indexed on its own; both carry `hreflang` alternates and both appear in the
+sitemap. The footer of each links to the other.
+
+**There is no build step, so the two pages are maintained by hand.** A copy
+change on one is not a copy change on the other — make it twice.
+
+Strings produced by JavaScript (validation errors, form status) live in a
+per-language table at the top of `main.js`, keyed off the page's `lang`
+attribute. Add a string there, not inline.
+
+> **Two RTL rules worth knowing before editing the CSS.**
+> 1. Never hide anything with a negative `left`/`right`. In LTR that is backward
+>    overflow and harmlessly clipped; in RTL it becomes real scrollable overflow
+>    and can push the whole page off-screen. `.skip-link` and `.hp` do it the
+>    safe way — copy those.
+> 2. Never put `letter-spacing` on Arabic text. It breaks the joins between
+>    letters. The `html[lang="ar"]` block resets it on every small label.
+>
+> Hosting runs `trailingSlash: false`, so the Arabic page's canonical URL is
+> `/ar`, not `/ar/`. `/ar/` 301s.
 
 ## Run it locally
 
