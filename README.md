@@ -50,10 +50,18 @@ Enquiries POST to a Google Apps Script web app that emails them to Lara. This wa
 chosen over Formspree and similar so there is no extra service account to maintain
 or lose — the script lives in Google Drive under the owner's existing account.
 
+**Deployed and live.** The script project is *Lara El Amine website - contact form*
+in `mywonderbooks@gmail.com`'s Drive; `FORM_ENDPOINT` in `main.js` already points at
+it. Enquiries go to the address in `TO` (currently Lara), with reply-to set to the
+enquirer so a plain Reply answers them directly.
+
+> **Keep `docs/contact-form.gs` ASCII-only.** The Apps Script editor mangles pasted
+> UTF-8 — an em-dash arrives as `,Aî` and would go out in every enquiry subject.
+
 The script source is version-controlled at `docs/contact-form.gs`. If it ever gets
 deleted from Drive, paste that file back in and redeploy.
 
-### One-time setup
+### Re-creating it from scratch (only if the script is lost)
 
 1. https://script.google.com/home/projects/create
 2. Replace the editor contents with `docs/contact-form.gs`, then Save.
@@ -81,6 +89,13 @@ deployment* instead would produce a different URL and break the form.
 The form falls back to opening the visitor's own mail app. That fails silently for
 anyone using webmail or a phone with no mail account configured — so an empty
 endpoint means enquiries are being lost, not queued.
+
+### Known tidy-up
+
+The script project has two leftover Web app deployments from failed first attempts,
+alongside the live one described above. They are unlinked, have unguessable URLs and
+behave identically, so they are harmless — but archiving them under
+**Deploy → Manage deployments** would be tidier.
 
 ## History
 
