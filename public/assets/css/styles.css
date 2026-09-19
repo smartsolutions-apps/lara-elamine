@@ -112,11 +112,17 @@ em{ font-style:italic; }
 .section-dark :focus-visible,.nav-mobile :focus-visible{ outline-color:var(--brass); }
 
 .skip-link{
-  position:absolute; left:-9999px; top:0; z-index:200;
+  /* Hidden upward, never sideways. A negative `left` is backward overflow in
+     LTR and harmlessly clipped, but in RTL left is the inline-END direction, so
+     it becomes ~9999px of real scrollable overflow and pushes the whole page
+     out of view. Block-start overflow is never scrollable, so this is safe in
+     both directions. */
+  position:absolute; inset-inline-start:0; top:0; z-index:200;
+  transform:translateY(-200%);
   background:var(--ink); color:var(--on-dark);
   padding:.85rem 1.35rem; border-radius:0 0 var(--r-sm) 0; font-weight:600;
 }
-.skip-link:focus{ left:0; }
+.skip-link:focus{ transform:translateY(0); }
 
 /* ---------- 3. Layout primitives ---------- */
 .shell{ width:100%; max-width:var(--shell); margin-inline:auto; padding-inline:var(--gutter); }
@@ -441,8 +447,13 @@ em{ font-style:italic; }
 .to-top svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 
 /* ---------- 18c. Honeypot + link-styled buttons ---------- */
-/* Off-screen rather than display:none — some bots skip hidden inputs. */
-.hp{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+/* Off-screen rather than display:none - some bots skip hidden inputs. Clipped
+   to a 1px box instead of pushed off-canvas, for the same RTL overflow reason
+   as .skip-link above. */
+.hp{
+  position:absolute; width:1px; height:1px; margin:-1px; padding:0; border:0;
+  overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
+}
 
 .linkish{
   padding:0; border:0; background:none; cursor:pointer;
@@ -559,16 +570,18 @@ em{ font-style:italic; }
 .choice-field.has-error .choice{ border-color:var(--accent-on-dark); }
 
 /* ---------- 19j. Footer ---------- */
+/* Three tracks so the contact buttons sit on the page's centre line rather than
+   being pushed to the far edge, which is what Lara asked for. */
 .footer-simple{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:1.5rem 2rem; flex-wrap:wrap;
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; gap:1.5rem 2rem;
 }
-/* Lara asked for the contact buttons to sit further in from the edge, so they
-   take the middle of the row rather than being pushed hard right. */
-.footer-simple .footer-social{ margin-inline:auto; }
+.footer-simple .brand-footer{ grid-column:1; }
+.footer-simple .footer-social{ grid-column:2; }
+.footer-meta{ grid-column:1 / -1; }
 /* The header lockup truncates its role line to one tidy line; the footer has
    room to wrap instead, and the full wording is the point down here. */
-.brand-footer{ margin-right:0; flex:1 1 18rem; min-width:0; }
+.brand-footer{ margin-inline-end:0; min-width:0; }
 .brand-footer .brand-name,
 .brand-footer .brand-role{ white-space:normal; overflow:visible; text-overflow:clip; }
 .brand-footer .brand-role{ line-height:1.35; }
@@ -690,7 +703,9 @@ html[lang="ar"] .credential-mark{ direction:ltr; }
   .nav-mobile{ width:100%; }
   .nav-mobile nav a{ font-size:1.25rem; }
   .choices{ grid-template-columns:1fr; }
-  .footer-simple{ flex-direction:column; align-items:flex-start; }
+  .footer-simple{ grid-template-columns:1fr; justify-items:start; }
+  .footer-simple .brand-footer,
+  .footer-simple .footer-social{ grid-column:1; }
   .credential{ border-radius:var(--r-lg); }
 }
 
