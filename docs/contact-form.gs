@@ -1,13 +1,13 @@
 /**
- * Lara El Amine — website contact form handler
+ * Lara El Amine - website contact form handler
  * =============================================
  * Receives the enquiry form on lara-elamine.web.app and emails it to Lara.
  *
  * This file is kept in the repo on purpose. The script itself lives in Google
- * Drive under Amr's Google account, which is easy to lose track of — if it ever
+ * Drive under Amr's Google account, which is easy to lose track of - if it ever
  * disappears, or needs changing, this is the source of truth. Paste it back in.
  *
- * SETUP (one time, ~5 minutes) — see README.md for the full walkthrough.
+ * SETUP (one time, ~5 minutes) - see README.md for the full walkthrough.
  *   1. https://script.google.com/home/projects/create
  *   2. Replace everything in the editor with this file, then Save.
  *   3. Deploy > New deployment > type "Web app"
@@ -15,7 +15,7 @@
  *        Who has access: Anyone            <- must be "Anyone", not "Anyone with Google account"
  *   4. Authorise. Google shows an "unverified app" warning because the script is
  *      your own and unpublished: Advanced > Go to <project name> (unsafe).
- *      It is your script sending your own mail — the warning is expected.
+ *      It is your script sending your own mail - the warning is expected.
  *   5. Copy the Web app URL (ends in /exec) and paste it into
  *      public/assets/js/main.js as FORM_ENDPOINT.
  *
@@ -37,7 +37,7 @@ function doPost(e) {
 
     // Honeypot. The form carries a hidden "website" field that is invisible to
     // people and irresistible to bots. Anything in it means the sender is not
-    // human — return success so the bot gets no signal to iterate against.
+    // human - return success so the bot gets no signal to iterate against.
     if (String(p.website || '').trim() !== '') {
       return json({ ok: true });
     }
@@ -49,8 +49,8 @@ function doPost(e) {
     }
 
     var interest = clean(p.interest) || 'General enquiry';
-    var org = clean(p.organisation) || '—';
-    var contactType = clean(p.contactType) || '—';
+    var org = clean(p.organisation) || '-';
+    var contactType = clean(p.contactType) || '-';
     var message = clean(p.message);
 
     var body = [
@@ -65,14 +65,14 @@ function doPost(e) {
       'Message:',
       message,
       '',
-      '—',
+      '-',
       'Sent automatically by the website contact form.',
       'Replying to this email goes straight back to ' + name + '.'
     ].join('\n');
 
     MailApp.sendEmail({
       to: TO,
-      subject: 'Website enquiry — ' + interest + ' (' + name + ')',
+      subject: 'Website enquiry - ' + interest + ' (' + name + ')',
       body: body,
       name: 'Lara El Amine website',
       // So Lara can just hit Reply and answer the enquirer directly.

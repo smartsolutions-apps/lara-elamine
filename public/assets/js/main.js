@@ -14,7 +14,7 @@
      own mail app — which fails silently for anyone on webmail, so
      an empty endpoint means enquiries are being lost. Fill it in.
      ============================================================ */
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxI-B1SauiLPOsqI6-dPzFKQcivGJNRGtlgHuKkUGqEuGBM_7myajAt1K1MRBlbO98wfQ/exec';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var formLoadedAt = Date.now();
