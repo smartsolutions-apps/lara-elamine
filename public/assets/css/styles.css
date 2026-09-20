@@ -469,6 +469,14 @@ em{ font-style:italic; }
 .js .reveal{ opacity:0; transform:translateY(22px); }
 .js .reveal.is-in{ opacity:1; transform:none; transition:opacity .7s var(--ease), transform .7s var(--ease); }
 
+/* Readable by screen readers and search engines, invisible on screen. Used for
+   the services heading, which the design does not show but the document outline
+   needs so levels do not jump from h1 to h3. */
+.visually-hidden{
+  position:absolute; width:1px; height:1px; margin:-1px; padding:0; border:0;
+  overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
+}
+
 /* ---------- 19b. Home service groups ---------- */
 /* The approved narrative splits the home offer into two labelled sets of
    three — "For individuals" and "For organisations" — rather than the old
