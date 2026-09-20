@@ -11,9 +11,8 @@ Hand-written static HTML. No build step, no dependencies, no framework. What is 
 
 ```
 public/
-  index.html              English page, all sections
-  ar/index.html           Arabic page (lang=ar dir=rtl), same structure
-  assets/css/styles.css   one stylesheet, serves both directions
+  index.html              the whole site, one page
+  assets/css/styles.css   one stylesheet, sectioned and commented
   assets/js/main.js       vanilla JS: nav, scroll reveal, contact form
   assets/img/             portrait (jpg + webp), share card, favicon
 firebase.json             hosting config — CSP and cache headers live here
