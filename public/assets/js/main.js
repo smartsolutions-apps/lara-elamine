@@ -17,52 +17,27 @@
   var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxI-B1SauiLPOsqI6-dPzFKQcivGJNRGtlgHuKkUGqEuGBM_7myajAt1K1MRBlbO98wfQ/exec';
 
 
-  /* ---------- Copy, per page language ----------
-     Both language pages share this file, so every user-facing string the script
-     produces has to come from here rather than being hard-coded in English. */
-  var LANG = document.documentElement.lang === 'ar' ? 'ar' : 'en';
+  /* User-facing strings the script produces, kept together so they are easy to
+     find and change. */
   var T = {
-    en: {
-      mailSubject: 'Enquiry via lara-elamine.web.app',
-      openMenu: 'Open menu',
-      closeMenu: 'Close menu',
-      required: 'This field is required.',
-      chooseOne: 'Please choose one.',
-      badEmail: 'Please enter a valid email address.',
-      fixFields: 'Please complete the highlighted fields.',
-      already: 'You have already sent an enquiry \u2014 I will be in touch shortly.',
-      thanks: 'Thank you \u2014 your message has been sent.',
-      sending: 'Sending\u2026',
-      openingMail: 'Opening your email app \u2014 press send to complete.',
-      replySoon: 'Thank you \u2014 I will reply within two business days.',
-      failed: 'Something went wrong. Please try WhatsApp instead.',
-      mailLabels: {
-        subject: 'Website enquiry', contactingAs: 'Contacting as', name: 'Name',
-        email: 'Email', organisation: 'Organisation', interest: 'Interested in', none: '\u2014'
-      }
-    },
-    ar: {
-      mailSubject: '\u0627\u0633\u062a\u0641\u0633\u0627\u0631 \u0639\u0628\u0631 lara-elamine.web.app',
-      openMenu: '\u0641\u062a\u062d \u0627\u0644\u0642\u0627\u0626\u0645\u0629',
-      closeMenu: '\u0625\u063a\u0644\u0627\u0642 \u0627\u0644\u0642\u0627\u0626\u0645\u0629',
-      required: '\u0647\u0630\u0627 \u0627\u0644\u062d\u0642\u0644 \u0645\u0637\u0644\u0648\u0628.',
-      chooseOne: '\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0623\u062d\u062f \u0627\u0644\u062e\u064a\u0627\u0631\u064a\u0646.',
-      badEmail: '\u064a\u0631\u062c\u0649 \u0625\u062f\u062e\u0627\u0644 \u0628\u0631\u064a\u062f \u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a \u0635\u062d\u064a\u062d.',
-      fixFields: '\u064a\u0631\u062c\u0649 \u0627\u0633\u062a\u0643\u0645\u0627\u0644 \u0627\u0644\u062d\u0642\u0648\u0644 \u0627\u0644\u0645\u062d\u062f\u062f\u0629.',
-      already: '\u0644\u0642\u062f \u0623\u0631\u0633\u0644\u062a \u0637\u0644\u0628\u064b\u0627 \u0628\u0627\u0644\u0641\u0639\u0644 \u2014 \u0633\u0623\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0643 \u0642\u0631\u064a\u0628\u064b\u0627.',
-      thanks: '\u0634\u0643\u0631\u064b\u0627 \u0644\u0643 \u2014 \u062a\u0645 \u0625\u0631\u0633\u0627\u0644 \u0631\u0633\u0627\u0644\u062a\u0643.',
-      sending: '\u062c\u0627\u0631\u064d \u0627\u0644\u0625\u0631\u0633\u0627\u0644\u2026',
-      openingMail: '\u064a\u062a\u0645 \u0641\u062a\u062d \u062a\u0637\u0628\u064a\u0642 \u0627\u0644\u0628\u0631\u064a\u062f \u2014 \u0627\u0636\u063a\u0637 \u0625\u0631\u0633\u0627\u0644 \u0644\u0625\u062a\u0645\u0627\u0645 \u0627\u0644\u0639\u0645\u0644\u064a\u0629.',
-      replySoon: '\u0634\u0643\u0631\u064b\u0627 \u0644\u0643 \u2014 \u0633\u0623\u0631\u062f \u062e\u0644\u0627\u0644 \u064a\u0648\u0645\u064a \u0639\u0645\u0644.',
-      failed: '\u062d\u062f\u062b \u062e\u0637\u0623 \u0645\u0627. \u064a\u0631\u062c\u0649 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629 \u0639\u0628\u0631 \u0648\u0627\u062a\u0633\u0627\u0628.',
-      mailLabels: {
-        subject: '\u0627\u0633\u062a\u0641\u0633\u0627\u0631 \u0645\u0646 \u0627\u0644\u0645\u0648\u0642\u0639',
-        contactingAs: '\u0627\u0644\u0635\u0641\u0629', name: '\u0627\u0644\u0627\u0633\u0645',
-        email: '\u0627\u0644\u0628\u0631\u064a\u062f', organisation: '\u0627\u0644\u0645\u0624\u0633\u0633\u0629',
-        interest: '\u0645\u0647\u062a\u0645 \u0628\u0640', none: '\u2014'
-      }
+    mailSubject: 'Enquiry via lara-elamine.web.app',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    required: 'This field is required.',
+    chooseOne: 'Please choose one.',
+    badEmail: 'Please enter a valid email address.',
+    fixFields: 'Please complete the highlighted fields.',
+    already: 'You have already sent an enquiry \u2014 I will be in touch shortly.',
+    thanks: 'Thank you \u2014 your message has been sent.',
+    sending: 'Sending\u2026',
+    openingMail: 'Opening your email app \u2014 press send to complete.',
+    replySoon: 'Thank you \u2014 I will reply within two business days.',
+    failed: 'Something went wrong. Please try WhatsApp instead.',
+    mailLabels: {
+      subject: 'Website enquiry', contactingAs: 'Contacting as', name: 'Name',
+      email: 'Email', organisation: 'Organisation', interest: 'Interested in', none: '\u2014'
     }
-  }[LANG];
+  };
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var formLoadedAt = Date.now();

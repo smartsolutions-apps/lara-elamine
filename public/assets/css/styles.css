@@ -578,7 +578,7 @@ em{ font-style:italic; }
 }
 .footer-simple .brand-footer{ grid-column:1; }
 .footer-simple .footer-social{ grid-column:2; }
-.footer-meta{ grid-column:1 / -1; }
+.footer-copy{ grid-column:1 / -1; }
 /* The header lockup truncates its role line to one tidy line; the footer has
    room to wrap instead, and the full wording is the point down here. */
 .brand-footer{ margin-inline-end:0; min-width:0; }
@@ -587,69 +587,11 @@ em{ font-style:italic; }
 .brand-footer .brand-role{ line-height:1.35; }
 .footer-copy{ margin:0; font-size:.8rem; width:100%; padding-top:1.4rem; border-top:1px solid var(--on-dark-line); }
 
-/* ---------- 19k. Footer meta + language switch ---------- */
-.footer-meta{
-  width:100%; padding-top:1.4rem; border-top:1px solid var(--on-dark-line);
-  display:flex; align-items:center; justify-content:space-between; gap:.8rem 1.5rem; flex-wrap:wrap;
+/* ---------- 19k. Footer meta ---------- */
+.footer-copy{
+  margin:0; width:100%; padding-top:1.4rem;
+  border-top:1px solid var(--on-dark-line); font-size:.8rem;
 }
-.footer-copy{ margin:0; font-size:.8rem; }
-.lang-switch{
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.5rem 1rem; border-radius:100px;
-  border:1px solid var(--on-dark-line); color:var(--on-dark);
-  font-size:.82rem; font-weight:600;
-  transition:background-color .25s var(--ease), border-color .25s var(--ease);
-}
-.lang-switch:hover{ background:var(--brass); border-color:var(--brass); color:var(--ink); }
-.lang-switch svg{
-  width:15px; height:15px; flex:none;
-  fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
-}
-
-/* ============================================================
-   19l. Arabic + RTL
-   The Arabic page shares this stylesheet; only type and direction change.
-   ============================================================ */
-html[lang="ar"]{
-  --font-display:"Noto Naskh Arabic","Times New Roman",serif;
-  --font-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
-}
-html[lang="ar"] body{ line-height:1.85; }
-html[lang="ar"] h1,
-html[lang="ar"] h2,
-html[lang="ar"] h3{ line-height:1.35; letter-spacing:0; }
-
-/* Arabic is a joined script: letter-spacing visibly breaks the connections
-   between letters, and uppercase does nothing. Both are reset everywhere the
-   English design applies them to small labels. */
-html[lang="ar"] .eyebrow,
-html[lang="ar"] .outcomes-label,
-html[lang="ar"] .contact-lbl,
-html[lang="ar"] .brand-role,
-html[lang="ar"] .field label,
-html[lang="ar"] .choice-field legend,
-html[lang="ar"] .glance-kicker,
-html[lang="ar"] .credential-text strong{
-  letter-spacing:0; text-transform:none;
-}
-html[lang="ar"] .eyebrow{ font-size:.84rem; }
-html[lang="ar"] .field label,
-html[lang="ar"] .choice-field legend,
-html[lang="ar"] .contact-lbl{ font-size:.82rem; }
-html[lang="ar"] .signature{ font-style:normal; font-weight:600; }
-/* The brand monogram and any Latin run inside Arabic text stay left-to-right. */
-html[lang="ar"] .brand-mark,
-html[lang="ar"] .credential-mark{ direction:ltr; }
-
-/* Arrow glyphs point along the reading direction. */
-[dir="rtl"] .btn svg,
-[dir="rtl"] .credential svg,
-[dir="rtl"] .flow li::before{ transform:scaleX(-1); }
-[dir="rtl"] .btn:hover svg{ transform:scaleX(-1) translateX(3px); }
-[dir="rtl"] .credential:hover svg{ transform:scaleX(-1) translateX(3px); }
-/* The drawer slides in from the near edge, which is the left in RTL. */
-[dir="rtl"] .nav-mobile{ transform:translateX(-100%); }
-[dir="rtl"] .nav-mobile.is-open{ transform:translateX(0); }
 
 /* ============================================================
    20. Responsive

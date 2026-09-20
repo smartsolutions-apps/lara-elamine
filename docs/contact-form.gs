@@ -52,8 +52,7 @@ function doPost(e) {
       email: email,
       organisation: clean(p.organisation) || 'Not given',
       interest: clean(p.interest) || 'General enquiry',
-      message: clean(p.message),
-      lang: clean(p.lang) === 'ar' ? 'Arabic' : 'English'
+      message: clean(p.message)
     };
 
     var subject = 'New enquiry: ' + lead.interest + ' - ' + lead.name;
@@ -153,7 +152,6 @@ function htmlBody(d) {
                         esc(d.email) + '</a>') +
           row('Organisation', esc(d.organisation)) +
           row('Interested in', esc(d.interest)) +
-          row('Page language', esc(d.lang)) +
         '</table>' +
 
         '<div style="margin-top:24px;padding:18px 20px;background:#FAF7FB;' +
@@ -199,7 +197,6 @@ function plainBody(d) {
     'Email:          ' + d.email,
     'Organisation:   ' + d.organisation,
     'Interested in:  ' + d.interest,
-    'Page language:  ' + d.lang,
     '',
     'Message:',
     d.message || '(none given)',
